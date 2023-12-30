@@ -18,6 +18,7 @@ public class Help implements CommandExecutor {
             commandSender.sendMessage(prefix + "Commands Available:");
             commandSender.sendMessage(prefix + "/jarutilshelp or /jarutils - Shows the info(s) of this plugin.");
             commandSender.sendMessage(prefix + "/vanish or /v - Enable or disable the vanish.");
+            commandSender.sendMessage(prefix + "/gm<gamemode> <player> - Sets gamemode of a player / yourself in the typed gamemode.");
         }
         return true;
     }
