@@ -1,0 +1,19 @@
+name: JarUtils
+version: '${project.version}'
+main: it.jar1.JarUtils
+author: 1Jar
+prefix: JarUtils
+api-version: '1.16'
+commands:
+  jarutils:
+    aliases: "jarutilshelp"
+  vanish:
+    aliases: "v"
+    permission: "jarutils.vanish"
+permissions:
+  jarutils.help:
+    default: op
+  jarutils.vanish:
+    default: op
+  jarutils.vanish.cansee:
+    default: op
