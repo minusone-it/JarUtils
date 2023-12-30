@@ -7,6 +7,14 @@ api-version: '1.16'
 commands:
   jarutils:
     aliases: "jarutilshelp"
+  gmc:
+    permission: "jarutils.gmc"
+  gms:
+    permission: "jarutils.gms"
+  gma:
+    permission: "jarutils.gma"
+  gmsp:
+    permission: "jarutils.gmsp"
   vanish:
     aliases: "v"
     permission: "jarutils.vanish"
@@ -16,4 +24,12 @@ permissions:
   jarutils.vanish:
     default: op
   jarutils.vanish.cansee:
+    default: op
+  jarutils.gmc:
+    default: op
+  jarutils.gms:
+    default: op
+  jarutils.gma:
+    default: op
+  jarutils.gmsp:
     default: op

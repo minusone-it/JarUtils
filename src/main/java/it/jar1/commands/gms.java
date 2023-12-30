@@ -13,7 +13,7 @@ public class gms implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         JarUtils p = new JarUtils();
         String prefix = p.prefix;
-        if(commandSender instanceof Player && commandSender.hasPermission("jarutils.gmc")) {
+        if(commandSender instanceof Player && commandSender.hasPermission("jarutils.gms")) {
             ChangeGamemode.changeGM(GameMode.SURVIVAL, commandSender);
             return true;
         }
