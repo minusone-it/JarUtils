@@ -8,27 +8,31 @@ import org.bukkit.entity.Player;
 import static it.jar1.JarUtils.prefix;
 
 public class ChangeGamemode {
+    private static boolean lang = it.jar1.JarUtils.lang.equalsIgnoreCase("eng");
     public static void changeGM(GameMode gm, CommandSender cmdSender) {
         Player p = (Player) cmdSender;
         if(!p.getGameMode().equals(gm)) {
             p.setGameMode(gm);
-            p.sendMessage(prefix + "Your gamemode has been changed to " + gm.toString().toLowerCase());
+            p.sendMessage(lang ? prefix + "You are now in " + gm.toString().toLowerCase() : prefix + "Ora sei in " + gm.toString().toLowerCase());
         } else {
-            p.sendMessage(prefix + "You are already in this gamemode!");
+            p.sendMessage(lang ? prefix + "You are already in "+ gm.toString().toLowerCase() +"!" : prefix + "Se già in "+ gm.toString().toLowerCase() +"!");
         }
     }
     public static void changeGM(GameMode gm, CommandSender cmdSender, String pl) {
         Player p = (Player) cmdSender;
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (!player.getGameMode().equals(gm) && player.getDisplayName().equalsIgnoreCase(pl)) {
-                player.setGameMode(gm);
-                player.sendMessage(prefix + "Your gamemode has been changed to " + gm.toString().toLowerCase() + " by " + p.getDisplayName());
-                player.sendMessage(prefix + "The gamemode of "+pl+" has been changed to " + gm.toString().toLowerCase());
-            } else if (!player.getDisplayName().equalsIgnoreCase(pl)) {
-                p.sendMessage(prefix + "The player "+pl+" does not exist!");
-            } else if (player.getGameMode().equals(gm)) {
-                p.sendMessage(prefix + "The player "+pl+" has already this gamemode!");
-            }
+
+        Player targetPlayer = Bukkit.getPlayerExact(pl);
+
+        if (targetPlayer == null) {
+            p.sendMessage(lang ? prefix + "The player " + pl + " does not exist!" : prefix + "Il player " + pl + " è inesistente!");
+            return;
+        }
+        if (!targetPlayer.getGameMode().equals(gm)) {
+            targetPlayer.setGameMode(gm);
+            targetPlayer.sendMessage(lang ? prefix + "You are now in " + gm.toString().toLowerCase() + " by " + p.getDisplayName() : prefix + "Sei ora in " + gm.toString().toLowerCase() + " grazie a " + p.getDisplayName());
+            p.sendMessage(lang ? prefix + "Now " + pl + " is in " + gm.toString().toLowerCase() : prefix + "Ora " + pl + " è in " + gm.toString().toLowerCase());
+        } else {
+            p.sendMessage(lang ? prefix + "The player " + pl + " already is this gamemode!" : prefix + "Il player " + pl + " è già in questa gamemode!");
         }
     }
 }

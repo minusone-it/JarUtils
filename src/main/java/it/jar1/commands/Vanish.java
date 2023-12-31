@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+import static it.jar1.JarUtils.lang;
 import static it.jar1.JarUtils.prefix;
 
 public class Vanish implements CommandExecutor {
@@ -28,14 +29,14 @@ public class Vanish implements CommandExecutor {
                     player.showPlayer(p);
                 }
                 vanished_players.remove(p);
-                p.sendMessage(prefix + "Vanish §4Disabled!");
+                p.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Vanish §4Disabled!" : prefix + "Vanish §4Disabilitata!");
             } else if (!vanished_players.contains(p)) {
                 for(Player player : Bukkit.getOnlinePlayers()) {
                     if(!player.hasPermission("jarutils.vanish.cansee"))
                         player.hidePlayer(p);
                 }
                 vanished_players.add(p);
-                p.sendMessage(prefix + "Vanish §aEnabled!");
+                p.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Vanish §aEnabled!" : prefix + "Vanish §aAbilitata!");
             }
             return true;
         } else if (!(commandSender instanceof Player)) {

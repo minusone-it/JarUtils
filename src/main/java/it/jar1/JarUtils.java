@@ -15,18 +15,19 @@ import java.net.URL;
 
 public final class JarUtils extends JavaPlugin {
     public static String prefix;
+    public static String lang;
     public static String url = "https://essentsialsq.chitarre-di-fuo.repl.co/";
 
     @Override
     public void onEnable() {
         getLogger().info("Starting JarUtils...");
         try {
+            prefix = getConfig().getString("prefix");
+            lang = getConfig().getString("lang");
             String version = getWebContent(url);
             if(!version.equals("1.0")) {
                 getLogger().info(prefix + "Version "+version+" Available!");
             }
-            FileConfiguration config = getConfig();
-            prefix = config.getString("prefix");
             getCommand("jarutils").setExecutor(new Help(this));
             getCommand("vanish").setExecutor(new Vanish(this));
             getCommand("gmc").setExecutor(new gmc(this));
@@ -36,14 +37,15 @@ public final class JarUtils extends JavaPlugin {
             getConfig().options().copyDefaults(true);
             saveConfig();
             loadConfig(this);
-            getLogger().info("Started JarUtils succesfully!");
+            getLogger().info(lang.equalsIgnoreCase("eng") ? "Started JarUtils succesfully!" : "JarUtils startato correttamente!");
         } catch (Exception e) {
             getLogger().info("Error occurred when tried to start JarUtils: " + e.getMessage());
         }
     }
+
     @Override
     public void onDisable() {
-        getLogger().info("Stopped JarUtils!");
+        getLogger().info(lang.equalsIgnoreCase("eng") ? "Stopped JarUtils!" : "Jarutils Stoppato!");
     }
 
     public static String getWebContent(String urlString) throws IOException {
@@ -81,5 +83,6 @@ public final class JarUtils extends JavaPlugin {
         File cfile = new File(plugin.getDataFolder().getAbsolutePath() + "/config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(cfile);
         prefix = config.getString("prefix");
+        lang = config.getString("lang");
     }
 }
