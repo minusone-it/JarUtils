@@ -4,12 +4,9 @@ import it.jar1.JarUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
-import java.io.File;
+import java.io.IOException;
 
 import static it.jar1.JarUtils.*;
 
@@ -22,8 +19,18 @@ public class Help implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
+        boolean newVersionAvailable = false;
+        String version = "";
+        try {
+            version = getWebContent(url);
+            if(!version.equals("1.0")) {
+                newVersionAvailable = true;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         if (args.length == 0)
-            commandSender.sendMessage(prefix + "This Server is running §3§lJarUtils V1.0§r§7, by 1Jar." + (commandSender.hasPermission("jarutils.help") ? (newVersionAvailable ? " (Version "+versionAvailable+" Available!)" : "") : ""));
+            commandSender.sendMessage(prefix + "This Server is running §3§lJarUtils V1.0§r§7, by 1Jar." + (commandSender.hasPermission("jarutils.help") ? (newVersionAvailable ? " (Version "+version+" Available!)" : "") : ""));
         else if(commandSender.hasPermission("jarutils.help") && commandSender instanceof Player && args.length >= 1 && args[0].equalsIgnoreCase("help")) {
             commandSender.sendMessage(prefix + "Commands Available:");
             commandSender.sendMessage(prefix + "/jarutilshelp or /jarutils - Shows the info(s) of this plugin.");

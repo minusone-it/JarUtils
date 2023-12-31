@@ -1,7 +1,6 @@
 package it.jar1;
 
 import it.jar1.commands.*;
-import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -17,8 +16,6 @@ import java.net.URL;
 public final class JarUtils extends JavaPlugin {
     public static String prefix;
     public static String url = "https://essentsialsq.chitarre-di-fuo.repl.co/";
-    public static Boolean newVersionAvailable = false;
-    public static String versionAvailable = "";
 
     @Override
     public void onEnable() {
@@ -26,9 +23,7 @@ public final class JarUtils extends JavaPlugin {
         try {
             String version = getWebContent(url);
             if(!version.equals("1.0")) {
-                versionAvailable = version;
                 getLogger().info(prefix + "Version "+version+" Available!");
-                newVersionAvailable = true;
             }
             FileConfiguration config = getConfig();
             prefix = config.getString("prefix");
@@ -48,11 +43,10 @@ public final class JarUtils extends JavaPlugin {
     }
     @Override
     public void onDisable() {
-        System.out.println("Stopping JarUtils...");
-        System.out.println("Stopped JarUtils!");
+        getLogger().info("Stopped JarUtils!");
     }
 
-    private static String getWebContent(String urlString) throws IOException {
+    public static String getWebContent(String urlString) throws IOException {
         URL url = new URL(urlString);
 
         HttpURLConnection connection = followRedirects(url);
