@@ -18,6 +18,11 @@ commands:
   vanish:
     aliases: "v"
     permission: "jarutils.vanish"
+  announce:
+    aliases: "broadcast"
+    permission: "jarutils.announce"
+  fly:
+    permission: "jarutils.fly"
 permissions:
   jarutils.help:
     default: op
@@ -34,4 +39,8 @@ permissions:
   jarutils.gmsp:
     default: op
   jarutils.configreload:
+    default: op
+  jarutils.announce:
+    default: op
+  jarutils.fly:
     default: op
