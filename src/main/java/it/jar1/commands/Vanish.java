@@ -10,12 +10,17 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+import static it.jar1.JarUtils.prefix;
+
 public class Vanish implements CommandExecutor {
+    private final JarUtils plugin;
+
+    public Vanish(JarUtils plugin) {
+        this.plugin = plugin;
+    }
     private List<Player> vanished_players = new ArrayList<>();
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        JarUtils asdf = new JarUtils();
-        String prefix = asdf.prefix;
+    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if(commandSender instanceof Player && commandSender.hasPermission("jarutils.vanish")) {
             Player p = (Player) commandSender;
             if(vanished_players.contains(p)) {

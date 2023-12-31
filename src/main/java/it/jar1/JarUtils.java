@@ -1,42 +1,51 @@
 package it.jar1;
 
 import it.jar1.commands.*;
+import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public final class JarUtils extends JavaPlugin {
-    public String prefix = getConfig().getString("prefix");
+    public static String prefix;
     public static String url = "https://essentsialsq.chitarre-di-fuo.repl.co/";
     public static Boolean newVersionAvailable = false;
     public static String versionAvailable = "";
 
     @Override
     public void onEnable() {
-        System.out.println("Starting JarUtils...");
+        getLogger().info("Starting JarUtils...");
         try {
             String version = getWebContent(url);
             if(!version.equals("1.0")) {
                 versionAvailable = version;
-                System.out.println(prefix + "Version "+version+" Available!");
+                getLogger().info(prefix + "Version "+version+" Available!");
                 newVersionAvailable = true;
             }
-            getCommand("jarutils").setExecutor(new Help());
-            getCommand("vanish").setExecutor(new Vanish());
-            getCommand("gmc").setExecutor(new gmc());
-            getCommand("gms").setExecutor(new gms());
-            getCommand("gma").setExecutor(new gma());
-            getCommand("gmsp").setExecutor(new gmsp());
-            System.out.println("Started JarUtils succesfully!");
+            FileConfiguration config = getConfig();
+            prefix = config.getString("prefix");
+            getCommand("jarutils").setExecutor(new Help(this));
+            getCommand("vanish").setExecutor(new Vanish(this));
+            getCommand("gmc").setExecutor(new gmc(this));
+            getCommand("gms").setExecutor(new gms(this));
+            getCommand("gma").setExecutor(new gma(this));
+            getCommand("gmsp").setExecutor(new gmsp(this));
+            getConfig().options().copyDefaults(true);
+            saveConfig();
+            loadConfig(this);
+            getLogger().info("Started JarUtils succesfully!");
         } catch (Exception e) {
-            System.out.println("Error occurred when tried to start JarUtils: " + e.getMessage());
+            getLogger().info("Error occurred when tried to start JarUtils: " + e.getMessage());
         }
     }
-
     @Override
     public void onDisable() {
         System.out.println("Stopping JarUtils...");
@@ -72,5 +81,11 @@ public final class JarUtils extends JavaPlugin {
         }
 
         return connection;
+    }
+
+    public void loadConfig(Plugin plugin) {
+        File cfile = new File(plugin.getDataFolder().getAbsolutePath() + "/config.yml");
+        FileConfiguration config = YamlConfiguration.loadConfiguration(cfile);
+        prefix = config.getString("prefix");
     }
 }

@@ -33,3 +33,5 @@ permissions:
     default: op
   jarutils.gmsp:
     default: op
+  jarutils.configreload:
+    default: op
