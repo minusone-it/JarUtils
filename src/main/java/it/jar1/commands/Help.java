@@ -36,12 +36,12 @@ public class Help implements CommandExecutor {
             commandSender.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "/jarutils help or /jarutils - Shows the info(s) of this plugin." : prefix + "/jarutils help o /jarutils - Permette di vedere i comandi di base.");
             commandSender.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "/vanish or /v - Enable or disable the vanish." : prefix + "/vanish o /v - Abilita o disabilita la vanish.");
             commandSender.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "/gm<gamemode> (<player>) - Sets gamemode of a player in the typed gamemode." : prefix + "/gm<gamemode> (<player>) - Setta la gamemode di un player in quella digitata.");
-        } else if (commandSender.hasPermission("jarutils.reloadconfig") && args.length >= 1 && args[0].equalsIgnoreCase("reload")) {
+        } else if (commandSender.hasPermission("jarutils.reloadconfig") && args.length >= 1 && args[0].equalsIgnoreCase("reload") | args[0].equalsIgnoreCase("rl")) {
             try {
                 plugin.loadConfig(plugin);
                 commandSender.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Config reloaded succesfully!" : prefix + "Config reloadata correttamente!");
             } catch (Exception e) {
-                commandSender.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Config didn't reload correctly; did you typed correct syntax? Check console too!" : prefix + "Config non reloadata correttamente. Hai digitato correttamente la sintassi? Guarda anche la console!");
+                commandSender.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Config didn't reload correctly; did you typed correct syntax? Check console for eventual errors!" : prefix + "Config non reloadata correttamente. Hai digitato correttamente la sintassi? Guarda anche la console per eventuali errori!");
             }
         } else if (args.length >= 1) {
             commandSender.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Subcommand not recognized." : prefix + "Sottocomando non riconosciuto.");

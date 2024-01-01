@@ -2,6 +2,9 @@ package it.jar1.commands;
 
 import it.jar1.JarUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Instrument;
+import org.bukkit.Note;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,8 +26,10 @@ public class Announce implements CommandExecutor {
             message = message.replace("&", "§");
 
             for (Player p : Bukkit.getOnlinePlayers()) {
-                p.sendMessage(lang.equalsIgnoreCase("eng") ? announceTitleColor + "Announce: " + message : announceTitleColor + "Annuncio: " + message);
-                p.sendTitle(lang.equalsIgnoreCase("eng") ? announceTitleColor + "Announce" : announceTitleColor + "Annuncio", message);
+                p.sendMessage(lang.equalsIgnoreCase("eng") ? announceTitleColor + "Announce:§r " + message : announceTitleColor + "Annuncio:§r " + message);
+                p.sendTitle(lang.equalsIgnoreCase("eng") ? announceTitleColor + "Announce" : announceTitleColor + "Annuncio", message, 5, 130, 5);
+                if(playAnnounceSound)
+                    p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 2.0f, 1.0f);
             }
             return true;
         } else {
@@ -32,4 +37,5 @@ public class Announce implements CommandExecutor {
             return false;
         }
     }
+
 }

@@ -15,6 +15,7 @@ import java.net.URL;
 public final class JarUtils extends JavaPlugin {
     public static String prefix;
     public static String lang;
+    public static boolean playAnnounceSound;
     public static String announceTitleColor;
     public static String url = "https://essentsialsq.chitarre-di-fuo.repl.co/";
 
@@ -25,10 +26,10 @@ public final class JarUtils extends JavaPlugin {
             prefix = getConfig().getString("prefix");
             lang = getConfig().getString("lang");
             announceTitleColor = getConfig().getString("announce-title-color");
+            playAnnounceSound = getConfig().getBoolean("play-announce-sound");
             String version = getWebContent(url);
-            if(!version.equals("1.0")) {
+            if(!version.equals("1.0"))
                 getLogger().info(prefix + "Version "+version+" Available!");
-            }
             getCommand("jarutils").setExecutor(new Help(this));
             getCommand("vanish").setExecutor(new Vanish(this));
             getCommand("announce").setExecutor(new Announce(this));
@@ -88,5 +89,6 @@ public final class JarUtils extends JavaPlugin {
         prefix = config.getString("prefix");
         lang = config.getString("lang");
         announceTitleColor = config.getString("announce-title-color");
+        playAnnounceSound = config.getBoolean("play-announce-sound");
     }
 }
