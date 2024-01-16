@@ -28,12 +28,12 @@ public class Fly implements CommandExecutor {
                 flying_players.add(p);
                 p.setAllowFlight(true);
                 p.setFlying(true);
-                p.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Fly §2Enabled." : prefix + "Fly §2Abilitata.");
+                p.sendMessage(lang.contains("en") ? prefix + "Fly §2Enabled." : prefix + "Fly §2Abilitata.");
             } else {
                 flying_players.remove(p);
                 p.setAllowFlight(false);
                 p.setFlying(false);
-                p.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Fly §4Disabled." : prefix + "Fly §4Disabilitata.");
+                p.sendMessage(lang.contains("en") ? prefix + "Fly §4Disabled." : prefix + "Fly §4Disabilitata.");
             }
             return true;
         } else if (sender.hasPermission("jarutils.fly") && args.length >= 1) {
@@ -45,17 +45,17 @@ public class Fly implements CommandExecutor {
                     flying_players.add(targetPlayer);
                     targetPlayer.setAllowFlight(true);
                     targetPlayer.setFlying(true);
-                    targetPlayer.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Fly §2Enabled by " + sender.getName() + "." : prefix + "Fly §2Abilitata da " + sender.getName() + ".");
-                    sender.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Fly §2Enabled for " + targetPlayer.getName() + "." : prefix + "Fly §2Abilitata per " + targetPlayer.getName() + ".");
+                    targetPlayer.sendMessage(lang.contains("en") ? prefix + "Fly §2Enabled by " + sender.getName() + "." : prefix + "Fly §2Abilitata da " + sender.getName() + ".");
+                    sender.sendMessage(lang.contains("en") ? prefix + "Fly §2Enabled for " + targetPlayer.getName() + "." : prefix + "Fly §2Abilitata per " + targetPlayer.getName() + ".");
                 } else {
                     flying_players.remove(targetPlayer);
                     targetPlayer.setAllowFlight(false);
                     targetPlayer.setFlying(false);
-                    targetPlayer.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Fly §4Disabled by " + sender.getName() + "." : prefix + "Fly §4Disabilitata da " + sender.getName() + ".");
-                    sender.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Fly §4Disabled for " + targetPlayer.getName() + "." : prefix + "Fly §4Disabilitata per " + targetPlayer.getName() + ".");
+                    targetPlayer.sendMessage(lang.contains("en") ? prefix + "Fly §4Disabled by " + sender.getName() + "." : prefix + "Fly §4Disabilitata da " + sender.getName() + ".");
+                    sender.sendMessage(lang.contains("en") ? prefix + "Fly §4Disabled for " + targetPlayer.getName() + "." : prefix + "Fly §4Disabilitata per " + targetPlayer.getName() + ".");
                 }
             } else {
-                sender.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Player "+targetPlayerName+" not found" : prefix + "Player "+targetPlayerName+" non trovato");
+                sender.sendMessage(lang.contains("en") ? prefix + "Player "+targetPlayerName+" not found" : prefix + "Player "+targetPlayerName+" non trovato");
             }
             return true;
         }

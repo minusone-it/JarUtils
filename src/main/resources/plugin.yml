@@ -23,6 +23,10 @@ commands:
     permission: "jarutils.announce"
   fly:
     permission: "jarutils.fly"
+  tempban:
+    permission: "jarutils.tempban"
+  report:
+    aliases: "cheater"
 permissions:
   jarutils.help:
     default: op
@@ -43,4 +47,8 @@ permissions:
   jarutils.announce:
     default: op
   jarutils.fly:
+    default: op
+  jarutils.report.cansee:
+    default: op
+  jarutils.tampban:
     default: op

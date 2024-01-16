@@ -17,7 +17,7 @@ public final class JarUtils extends JavaPlugin {
     public static String lang;
     public static boolean playAnnounceSound;
     public static String announceTitleColor;
-    public static String url = "https://essentsialsq.chitarre-di-fuo.repl.co/";
+    public static String url = "https://4e60d526-f179-470a-b5b3-a421deb6711d-00-3ngeku8kq47c2.worf.replit.dev/";
 
     @Override
     public void onEnable() {
@@ -29,7 +29,7 @@ public final class JarUtils extends JavaPlugin {
             playAnnounceSound = getConfig().getBoolean("play-announce-sound");
             String version = getWebContent(url);
             if(!version.equals("1.0"))
-                getLogger().info(prefix + "Version "+version+" Available!");
+                getLogger().info(prefix + "Version " + version + " Available!");
             getCommand("jarutils").setExecutor(new Help(this));
             getCommand("vanish").setExecutor(new Vanish(this));
             getCommand("announce").setExecutor(new Announce(this));
@@ -38,10 +38,12 @@ public final class JarUtils extends JavaPlugin {
             getCommand("gma").setExecutor(new gma(this));
             getCommand("gmsp").setExecutor(new gmsp(this));
             getCommand("fly").setExecutor(new Fly(this));
+            getCommand("report").setExecutor(new Report(this));
+            getCommand("tempban").setExecutor(new TempBan(this));
+            saveDefaultConfig();
             getConfig().options().copyDefaults(true);
-            saveConfig();
             loadConfig(this);
-            getLogger().info(lang.equalsIgnoreCase("eng") ? "Started JarUtils succesfully!" : "JarUtils startato correttamente!");
+            getLogger().info(lang.contains("en") ? "Started JarUtils succesfully!" : "JarUtils startato correttamente!");
         } catch (Exception e) {
             getLogger().info("Error occurred when tried to start JarUtils: " + e.getMessage());
         }
@@ -49,7 +51,7 @@ public final class JarUtils extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getLogger().info(lang.equalsIgnoreCase("eng") ? "Stopped JarUtils!" : "Jarutils Stoppato!");
+        getLogger().info(lang.contains("en") ? "Stopped JarUtils!" : "Jarutils Stoppato!");
     }
 
     public static String getWebContent(String urlString) throws IOException {

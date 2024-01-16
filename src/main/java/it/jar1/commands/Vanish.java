@@ -29,18 +29,18 @@ public class Vanish implements CommandExecutor {
                     player.showPlayer(p);
                 }
                 vanished_players.remove(p);
-                p.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Vanish §4Disabled!" : prefix + "Vanish §4Disabilitata!");
+                p.sendMessage(lang.contains("en") ? prefix + "Vanish §4Disabled!" : prefix + "Vanish §4Disabilitata!");
             } else if (!vanished_players.contains(p)) {
                 for(Player player : Bukkit.getOnlinePlayers()) {
                     if(!player.hasPermission("jarutils.vanish.cansee"))
                         player.hidePlayer(p);
                 }
                 vanished_players.add(p);
-                p.sendMessage(lang.equalsIgnoreCase("eng") ? prefix + "Vanish §aEnabled!" : prefix + "Vanish §aAbilitata!");
+                p.sendMessage(lang.contains("en") ? prefix + "Vanish §aEnabled!" : prefix + "Vanish §aAbilitata!");
             }
             return true;
         } else if (!(commandSender instanceof Player)) {
-            commandSender.sendMessage("§cYou have to login as a player to execute this command!");
+            commandSender.sendMessage(prefix + (lang.contains("en") ? "§cYou have to login as a player to execute this command!" : "§cDevi essere un player per eseguire questo comando!"));
             return true;
         }
         return false;
