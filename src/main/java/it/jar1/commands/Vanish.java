@@ -36,7 +36,7 @@ public class Vanish implements CommandExecutor {
                         player.hidePlayer(p);
                 }
                 vanished_players.add(p);
-                p.sendMessage(lang.contains("en") ? prefix + "Vanish §aEnabled!" : prefix + "Vanish §aAbilitata!");
+                p.sendMessage(lang.contains("en") ? prefix + "Vanish §aEnabled!" : prefix + "Vanish §2Abilitata!");
             }
             return true;
         } else if (!(commandSender instanceof Player)) {

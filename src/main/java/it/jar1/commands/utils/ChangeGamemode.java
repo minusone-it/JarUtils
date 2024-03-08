@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import static it.jar1.JarUtils.prefix;
 
 public class ChangeGamemode {
-    private static boolean lang = it.jar1.JarUtils.lang.contains("en");
+    private static boolean lang = it.jar1.JarUtils.lang.equalsIgnoreCase("en") || it.jar1.JarUtils.lang.equalsIgnoreCase("eng");
     public static void changeGM(GameMode gm, CommandSender cmdSender) {
         Player p = (Player) cmdSender;
         if(!p.getGameMode().equals(gm)) {

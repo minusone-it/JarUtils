@@ -18,17 +18,17 @@ public class Report implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(sender instanceof Player) {
+        if (sender instanceof Player) {
             Player reporter = (Player) sender;
-            if(!(args.length >= 1)) {
+            if (!(args.length >= 1)) {
                 reporter.sendMessage(prefix + (lang.contains("en") ?  "§cCan't send report to staffers. Have you forgotten to type the player to report?" : "§cHai per caso dimenticato di scrivere il nome del player da reportare?"));
             }
-            if(args.length >= 1 && Bukkit.getPlayer(args[0]) != null) {
+            if (args.length >= 1 && Bukkit.getPlayer(args[0]) != null) {
                 Player cheater = Bukkit.getPlayer(args[0]);
                 reporter.sendMessage(prefix + (lang.contains("en") ?  "Player reported successfully!" : "Player reportato correttamente!"));
-                for(Player player : Bukkit.getOnlinePlayers()) {
-                    if(player.hasPermission("jaruitls.report.cansee")) {
-                        player.sendMessage(prefix + (lang.contains("en") ? cheater + " has been reported!" : cheater + " è stato reportato!"));
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    if (player.hasPermission("jaruitls.report.cansee")) {
+                        player.sendMessage(prefix + (lang.contains("en") ? cheater.getDisplayName() + " has been reported!" : cheater + " è stato reportato!"));
                     }
                 }
             } else {

@@ -21,16 +21,16 @@ public class Help implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         boolean newVersionAvailable = false;
         String version = "";
-        try {
-            version = getWebContent(url);
+        //try {
+            version = "1.0";//getWebContent(url);
             if(!version.equals("1.0")) {
                 newVersionAvailable = true;
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        //} catch (IOException e) {
+        //    throw new RuntimeException(e);
+        //}
         if (args.length == 0)
-            commandSender.sendMessage(lang.contains("en") ? (prefix + "This Server is running §3§lJarUtils V1.0§r§7, by 1Jar." + (commandSender.hasPermission("jarutils.help") ? (newVersionAvailable ? " (Version "+version+" Available!)" : "") : "")) : (prefix + "Questo server esegue il plugin §3§lJarUtils V1.0§r§7, fatto da 1Jar." + (commandSender.hasPermission("jarutils.help") ? (newVersionAvailable ? " (La versione "+version+" è ora disponibile!)" : "") : "")));
+            commandSender.sendMessage(lang.contains("en") ? (prefix + "This Server is running §3§lJarUtils V1.1§r§7, by 1Jar." + (commandSender.hasPermission("jarutils.help") ? (newVersionAvailable ? " (Version "+version+" Available!)" : "") : "")) : (prefix + "Questo server esegue il plugin §3§lJarUtils V1.1§r§7, fatto da 1Jar." + (commandSender.hasPermission("jarutils.help") ? (newVersionAvailable ? " (La versione "+version+" è ora disponibile!)" : "") : "")));
         else if(commandSender.hasPermission("jarutils.help") && commandSender instanceof Player && args.length >= 1 && args[0].equalsIgnoreCase("help")) {
             commandSender.sendMessage(lang.contains("en") ? prefix + "Commands Available:" : prefix + "Comandi Disponibili:");
             commandSender.sendMessage(lang.contains("en") ? prefix + "/jarutils help or /jarutils - Shows the info(s) of this plugin." : prefix + "/jarutils help o /jarutils - Permette di vedere i comandi di base.");
@@ -44,7 +44,7 @@ public class Help implements CommandExecutor {
                 commandSender.sendMessage(lang.contains("en") ? prefix + "Config didn't reload correctly; did you typed correct syntax? Check console for eventual errors!" : prefix + "Config non reloadata correttamente. Hai digitato correttamente la sintassi? Guarda anche la console per eventuali errori!");
             }
         } else if (args.length >= 1) {
-            commandSender.sendMessage(lang.contains("en") ? prefix + "Subcommand not recognized." : prefix + "Sottocomando non riconosciuto.");
+            commandSender.sendMessage(lang.contains("en") ? prefix + "Arg not recognized." : prefix + "Arg non riconosciuto.");
         }
         return true;
     }
