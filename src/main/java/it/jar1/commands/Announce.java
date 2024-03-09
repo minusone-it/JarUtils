@@ -31,7 +31,7 @@ public class Announce implements CommandExecutor {
             }
             return true;
         } else {
-            commandSender.sendMessage(lang.contains("en") ? prefix + "§cCan't send message. Have you forgotten to insert an announcement message?" : prefix + "§cImpossibile mandare il messaggio. Ti sei per caso dimenticato di mettere il messaggio di annuncio?");
+            commandSender.sendMessage(lang.contains("en") ? plugin.prefix + "§cCan't send message. Have you forgotten to insert an announcement message?" : plugin.prefix + "§cImpossibile mandare il messaggio. Ti sei per caso dimenticato di mettere il messaggio di annuncio?");
             return false;
         }
 

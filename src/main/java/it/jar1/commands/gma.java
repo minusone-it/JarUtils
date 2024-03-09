@@ -17,7 +17,7 @@ public class gma implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if(commandSender instanceof Player && commandSender.hasPermission("jarutils.gma") && !(args.length >= 1)) {
+        if (commandSender instanceof Player && commandSender.hasPermission("jarutils.gma") && !(args.length >= 1)) {
             ChangeGamemode.changeGM(GameMode.ADVENTURE, commandSender);
             return true;
         } else if (args.length >= 1) {

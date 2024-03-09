@@ -3,7 +3,7 @@ version: '1.1'
 main: it.jar1.JarUtils
 author: 1Jar
 prefix: JarUtils
-api-version: '1.16'
+api-version: '1.8.8'
 commands:
   jarutils:
     aliases: "jarutilshelp"
@@ -29,6 +29,11 @@ commands:
     permission: "jarutils.unban"
   report:
     aliases: "cheater"
+    permission: "jarutils.report"
+  mute:
+    permission: "jarutils.mute"
+  unmute:
+    permission: "jarutils.unmute"
 permissions:
   jarutils.help:
     default: op
@@ -55,4 +60,8 @@ permissions:
   jarutils.tempban:
     default: op
   jarutils.unban:
+    default: op
+  jarutils.mute:
+    default: op
+  jarutils.unmute:
     default: op

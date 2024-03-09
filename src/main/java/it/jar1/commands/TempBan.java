@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import static it.jar1.JarUtils.lang;
-import static it.jar1.JarUtils.prefix;
+
 
 public class TempBan implements CommandExecutor {
     private final JarUtils plugin;
@@ -22,9 +22,9 @@ public class TempBan implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(sender.hasPermission("jarutils.ban")) {
+        if (sender.hasPermission("jarutils.ban")) {
             if (args.length < 3) {
-                sender.sendMessage(prefix + (language ? "§cCan't ban the player. Please provide player, duration, and reason." : "§cImpossibile bannare il player. Per favore, fornisci il nome del giocatore, la durata e la motivazione."));
+                sender.sendMessage(plugin.prefix + (language ? "§cCan't ban the player. Please provide player, duration, and reason." : "§cImpossibile bannare il player. Per favore, fornisci il nome del giocatore, la durata e la motivazione."));
                 return true;
             }
 
@@ -32,7 +32,7 @@ public class TempBan implements CommandExecutor {
             Player targetPlayer = sender.getServer().getPlayer(playerName);
 
             if (targetPlayer == null) {
-                sender.sendMessage(prefix + (language ? "§cThe specified player isn't online." : "§cIl player specificato non è online."));
+                sender.sendMessage(plugin.prefix + (language ? "§cThe specified player isn't online." : "§cIl player specificato non è online."));
                 return true;
             }
 
@@ -43,9 +43,9 @@ public class TempBan implements CommandExecutor {
             long expiration = System.currentTimeMillis() + (duration * 1000);
             Bukkit.getBanList(BanList.Type.NAME).addBan(playerName, reason, new java.util.Date(expiration), sender.getName());
 
-            targetPlayer.kickPlayer(prefix + (language ? "You have been temporarily banned. The ban will expire in " + durationStr + ". Reason: " + reason : "Sei stato temporaneamente bannato. Il ban scadrà in " + durationStr + ". Motivo: " + reason));
+            targetPlayer.kickPlayer(plugin.prefix + (language ? "You have been temporarily banned. The ban will expire in " + durationStr + ". Reason: " + reason : "Sei stato temporaneamente bannato. Il ban scadrà in " + durationStr + ". Motivo: " + reason));
 
-            sender.sendMessage(prefix + (language ? "The player " + playerName + " has been temporarily banned for " + durationStr + "." : "Il giocatore " + playerName + " è stato temporaneamente bannato per " + durationStr + "."));
+            sender.sendMessage(plugin.prefix + (language ? "The player " + playerName + " has been temporarily banned for " + durationStr + "." : "Il giocatore " + playerName + " è stato temporaneamente bannato per " + durationStr + "."));
             return true;
         } else
             return false;

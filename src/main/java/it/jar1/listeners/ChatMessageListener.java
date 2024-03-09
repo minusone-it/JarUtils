@@ -12,6 +12,14 @@ public class ChatMessageListener implements Listener {
     }
     @EventHandler
     public void onChatMessage(AsyncPlayerChatEvent event) {
-        if ()
+        if (plugin.muted_players.contains(event.getPlayer())) {
+            event.setCancelled(true);
+            event.getPlayer().sendMessage(plugin.prefix + "You have been muted for "  + plugin.muted_players_reasons.get(event.getPlayer().getName()));
+        }
+        /*for (Player p : Bukkit.getOnlinePlayers()) {
+            if (event.getMessage().contains("" + p.getName())) {
+                event.setMessage(event.getMessage());
+            }
+        }*/
     }
 }

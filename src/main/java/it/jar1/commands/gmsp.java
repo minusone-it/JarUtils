@@ -17,7 +17,7 @@ public class gmsp implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if(commandSender instanceof Player && commandSender.hasPermission("jarutils.gmsp") && !(args.length >= 1)) {
+        if (commandSender instanceof Player && commandSender.hasPermission("jarutils.gmsp") && !(args.length >= 1)) {
             ChangeGamemode.changeGM(GameMode.SPECTATOR, commandSender);
             return true;
         } else if (args.length >= 1) {

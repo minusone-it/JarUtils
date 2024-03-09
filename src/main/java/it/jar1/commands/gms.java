@@ -17,7 +17,7 @@ public class gms implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if(commandSender instanceof Player && commandSender.hasPermission("jarutils.gms") && !(args.length >= 1)) {
+        if (commandSender instanceof Player && commandSender.hasPermission("jarutils.gms") && !(args.length >= 1)) {
             ChangeGamemode.changeGM(GameMode.SURVIVAL, commandSender);
             return true;
         } else if (args.length >= 1) {
