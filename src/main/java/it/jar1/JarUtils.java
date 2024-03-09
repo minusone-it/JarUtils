@@ -29,6 +29,7 @@ public final class JarUtils extends JavaPlugin {
     public static String announceTitleColor;
     public List<Player> muted_players;
     public ConcurrentHashMap<Player, String> muted_players_reasons;
+    public List<String> blocked_words;
     public static String url = "https://4e60d526-f179-470a-b5b3-a421deb6711d-00-3ngeku8kq47c2.worf.replit.dev/";
 
     @Override
@@ -40,6 +41,7 @@ public final class JarUtils extends JavaPlugin {
             announceTitleColor = getConfig().getString("announce-title-color");
             playAnnounceSound = getConfig().getBoolean("play-announce-sound");
             joinQuitMessages = getConfig().getBoolean("no-join-quit-message");
+            blocked_words = getConfig().getStringList("blocked-words");
             muted_players = new ArrayList<>();
             muted_players_reasons = new ConcurrentHashMap<>();
             String version = "1.0"/*getWebContent(url)*/;

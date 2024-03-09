@@ -5,3 +5,5 @@ lang: eng
 announce-title-color: "§3"
 play-announce-sound: true
 no-join-quit-message: true
+blocked-words:
+  - Shit
