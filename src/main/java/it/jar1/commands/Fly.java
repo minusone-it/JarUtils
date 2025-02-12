@@ -1,61 +1,59 @@
 package it.jar1.commands;
 
-import it.jar1.JarUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
+import it.jar1.*;
+import java.util.*;
+import org.bukkit.command.*;
+import org.bukkit.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static it.jar1.JarUtils.lang;
-
-
-public class Fly implements CommandExecutor {
-    List<Player> flying_players = new ArrayList<>();
+public class Fly implements CommandExecutor
+{
+    List<Player> flying_players;
     private final JarUtils plugin;
-    public Fly(JarUtils plugin) {
+    
+    public Fly(final JarUtils plugin) {
+        this.flying_players = new ArrayList<Player>();
         this.plugin = plugin;
     }
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player & sender.hasPermission("jarutils.fly") && !(args.length >= 1)) {
-            Player p = (Player) sender;
-            if (!flying_players.contains(p)) {
-                flying_players.add(p);
+    
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+        if ((sender instanceof Player & sender.hasPermission("jarutils.fly")) && args.length < 1) {
+            final Player p = (Player)sender;
+            if (!this.flying_players.contains(p)) {
+                this.flying_players.add(p);
                 p.setAllowFlight(true);
                 p.setFlying(true);
-                p.sendMessage(lang.contains("en") ? plugin.prefix + "Fly ยง2Enabled." : plugin.prefix + "Fly ยง2Abilitata.");
-            } else {
-                flying_players.remove(p);
+                p.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ง2Enabled.") : (this.plugin.prefix + "Fly ง2Abilitata."));
+            }
+            else {
+                this.flying_players.remove(p);
                 p.setAllowFlight(false);
                 p.setFlying(false);
-                p.sendMessage(lang.contains("en") ? plugin.prefix + "Fly ยง4Disabled." : plugin.prefix + "Fly ยง4Disabilitata.");
+                p.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ง4Disabled.") : (this.plugin.prefix + "Fly ง4Disabilitata."));
             }
             return true;
-        } else if (sender.hasPermission("jarutils.fly") && args.length >= 1) {
-            String targetPlayerName = args[0];
-            Player targetPlayer = Bukkit.getPlayer(targetPlayerName);
-
+        }
+        if (sender.hasPermission("jarutils.fly") && args.length >= 1) {
+            final String targetPlayerName = args[0];
+            final Player targetPlayer = Bukkit.getPlayer(targetPlayerName);
             if (targetPlayer != null) {
-                if (!flying_players.contains(targetPlayer)) {
-                    flying_players.add(targetPlayer);
+                if (!this.flying_players.contains(targetPlayer)) {
+                    this.flying_players.add(targetPlayer);
                     targetPlayer.setAllowFlight(true);
                     targetPlayer.setFlying(true);
-                    targetPlayer.sendMessage(lang.contains("en") ? plugin.prefix + "Fly ยง2Enabled by " + sender.getName() + "." : plugin.prefix + "Fly ยง2Abilitata da " + sender.getName() + ".");
-                    sender.sendMessage(lang.contains("en") ? plugin.prefix + "Fly ยง2Enabled for " + targetPlayer.getName() + "." : plugin.prefix + "Fly ยง2Abilitata per " + targetPlayer.getName() + ".");
-                } else {
-                    flying_players.remove(targetPlayer);
+                    targetPlayer.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ง2Enabled by " + sender.getName() + ".") : (this.plugin.prefix + "Fly ง2Abilitata da " + sender.getName() + "."));
+                    sender.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ง2Enabled for " + targetPlayer.getName() + ".") : (this.plugin.prefix + "Fly ง2Abilitata per " + targetPlayer.getName() + "."));
+                }
+                else {
+                    this.flying_players.remove(targetPlayer);
                     targetPlayer.setAllowFlight(false);
                     targetPlayer.setFlying(false);
-                    targetPlayer.sendMessage(lang.contains("en") ? plugin.prefix + "Fly ยง4Disabled by " + sender.getName() + "." : plugin.prefix + "Fly ยง4Disabilitata da " + sender.getName() + ".");
-                    sender.sendMessage(lang.contains("en") ? plugin.prefix + "Fly ยง4Disabled for " + targetPlayer.getName() + "." : plugin.prefix + "Fly ยง4Disabilitata per " + targetPlayer.getName() + ".");
+                    targetPlayer.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ง4Disabled by " + sender.getName() + ".") : (this.plugin.prefix + "Fly ง4Disabilitata da " + sender.getName() + "."));
+                    sender.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ง4Disabled for " + targetPlayer.getName() + ".") : (this.plugin.prefix + "Fly ง4Disabilitata per " + targetPlayer.getName() + "."));
                 }
-            } else {
-                sender.sendMessage(lang.contains("en") ? plugin.prefix + "Player "+targetPlayerName+" not found" : plugin.prefix + "Player "+targetPlayerName+" non trovato");
+            }
+            else {
+                sender.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Player " + targetPlayerName + " not found") : (this.plugin.prefix + "Player " + targetPlayerName + " non trovato"));
             }
             return true;
         }

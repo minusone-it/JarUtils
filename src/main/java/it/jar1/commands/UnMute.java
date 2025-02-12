@@ -1,26 +1,29 @@
 package it.jar1.commands;
 
-import it.jar1.JarUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import it.jar1.*;
+import org.bukkit.command.*;
+import org.bukkit.*;
 
-public class UnMute implements CommandExecutor {
+public class UnMute implements CommandExecutor
+{
     JarUtils plugin;
-    public UnMute(JarUtils plugin) {
+    
+    public UnMute(final JarUtils plugin) {
         this.plugin = plugin;
     }
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (sender.hasPermission("jarutils.unmute")) {
             if (args.length > 0) {
-                if (plugin.muted_players.contains(args[0])) {
-                    plugin.muted_players.remove(Bukkit.getServer().getPlayer(args[0]));
-                    plugin.muted_players_reasons.remove(args[0]);
-                    sender.sendMessage(plugin.prefix + args[0] + " has been successfully unmuted.");
-                } else {
-                    sender.sendMessage(plugin.prefix + args[0] + " hasn't got a mute.");
+                if (this.plugin.muted_players.contains(Bukkit.getServer().getPlayer(args[0]))) {
+                    this.plugin.muted_players.remove(Bukkit.getServer().getPlayer(args[0]));
+                    this.plugin.muted_players_reasons.remove(Bukkit.getServer().getPlayer(args[0]));
+                    this.plugin.muted_players_duration.remove(Bukkit.getServer().getPlayer(args[0]));
+                    Mute.unmutePlayer(Bukkit.getServer().getPlayer(args[0]).getUniqueId());
+                    sender.sendMessage(this.plugin.prefix + args[0] + " has been successfully unmuted.");
+                }
+                else {
+                    sender.sendMessage(this.plugin.prefix + args[0] + " hasn't got a mute.");
                 }
             }
             return true;
