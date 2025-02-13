@@ -6,6 +6,7 @@ import org.bukkit.*;
 import java.util.*;
 import org.bukkit.entity.*;
 
+@SuppressWarnings("ALL")
 public class TempBan implements CommandExecutor
 {
     private final JarUtils plugin;
@@ -21,7 +22,7 @@ public class TempBan implements CommandExecutor
             return false;
         }
         if (args.length < 3) {
-            sender.sendMessage(this.plugin.prefix + (this.language ? "§cCan't ban the player. Usage: /tempban <player> <duration> <reason>." : "§cImpossibile bannare il player. Per favore, fornisci il nome del giocatore, la durata e la motivazione."));
+            sender.sendMessage(this.plugin.prefix + (this.language ? "Â§cCan't ban the player. Usage: /tempban <player> <duration> <reason>." : "Â§cImpossibile bannare il player. Per favore, fornisci il nome del giocatore, la durata e la motivazione."));
             return true;
         }
         final String playerName = args[0];
@@ -53,7 +54,7 @@ public class TempBan implements CommandExecutor
         }
         catch (Exception e2) {
             if (e2 instanceof NumberFormatException) {
-                sender.sendMessage(this.plugin.prefix + "§cCould not ban the player. Usage: /tempban <player> <duration> <reason>.");
+                sender.sendMessage(this.plugin.prefix + "Â§cCould not ban the player. Usage: /tempban <player> <duration> <reason>.");
             }
         }
         return true;

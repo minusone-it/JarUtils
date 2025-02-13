@@ -14,8 +14,9 @@ public class JoinListener implements Listener
     
     @EventHandler
     public void onJoin(final PlayerJoinEvent event) {
-        final JarUtils plugin = this.plugin;
-        if (JarUtils.joinQuitMessages) {
+        if (plugin.onMaintenance)
+            event.getPlayer().kickPlayer("§cMAINTENANCE ON. §7See more info on https://dsc.gg/power-pixel/");
+        if (plugin.joinQuitMessages) {
             event.setJoinMessage("");
         }
     }

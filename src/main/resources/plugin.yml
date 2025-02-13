@@ -29,11 +29,8 @@ commands:
     permission: "jarutils.unban"
   report:
     aliases: "cheater"
-    permission: "jarutils.report"
-  mute:
-    permission: "jarutils.mute"
-  unmute:
-    permission: "jarutils.unmute"
+  maintenance:
+    permission: "jarutils.maintenance"
 permissions:
   jarutils.help:
     default: op
@@ -61,7 +58,5 @@ permissions:
     default: op
   jarutils.unban:
     default: op
-  jarutils.mute:
-    default: op
-  jarutils.unmute:
+  jarutils.maintenance:
     default: op

@@ -25,6 +25,7 @@ public final class JarUtils extends JavaPlugin
     public HashMap<Player, String> muted_players_reasons;
     public HashMap<Player, String> muted_players_duration;
     public List<String> blocked_words;
+    public boolean onMaintenance;
     
     public void onEnable() {
         this.getLogger().info("Starting JarUtils...");
@@ -39,28 +40,28 @@ public final class JarUtils extends JavaPlugin
             this.muted_players_reasons = new HashMap<Player, String>();
             this.muted_players_duration = new HashMap<Player, String>();
             this.blocked_words = (List<String>)this.getConfig().getStringList("blocked-words");
+            this.onMaintenance = false;
             final String version = "1.0";
             if (!version.equals("1.0")) {
                 this.getLogger().info(this.prefix + "Version " + version + " Available!");
             }
-            this.getCommand("jarutils").setExecutor((CommandExecutor)new Help(this));
-            this.getCommand("vanish").setExecutor((CommandExecutor)new Vanish(this));
-            this.getCommand("announce").setExecutor((CommandExecutor)new Announce(this));
-            this.getCommand("gmc").setExecutor((CommandExecutor)new gmc(this));
-            this.getCommand("gms").setExecutor((CommandExecutor)new gms(this));
-            this.getCommand("gma").setExecutor((CommandExecutor)new gma(this));
-            this.getCommand("gmsp").setExecutor((CommandExecutor)new gmsp(this));
-            this.getCommand("fly").setExecutor((CommandExecutor)new Fly(this));
-            this.getCommand("report").setExecutor((CommandExecutor)new Report(this));
-            this.getCommand("tempban").setExecutor((CommandExecutor)new TempBan(this));
-            this.getCommand("unban").setExecutor((CommandExecutor)new UnBan(this));
-            this.getCommand("mute").setExecutor((CommandExecutor)new Mute());
-            this.getCommand("unmute").setExecutor((CommandExecutor)new UnMute(this));
-            this.getServer().getPluginManager().registerEvents((Listener)new JoinListener(this), (Plugin)this);
-            this.getServer().getPluginManager().registerEvents((Listener)new QuitListener(this), (Plugin)this);
-            this.getServer().getPluginManager().registerEvents((Listener)new ChatMessageListener(this), (Plugin)this);
+            this.getCommand("jarutils").setExecutor(new Help(this));
+            this.getCommand("vanish").setExecutor(new Vanish(this));
+            this.getCommand("announce").setExecutor(new Announce(this));
+            this.getCommand("gmc").setExecutor(new gmc(this));
+            this.getCommand("gms").setExecutor(new gms(this));
+            this.getCommand("gma").setExecutor(new gma(this));
+            this.getCommand("gmsp").setExecutor(new gmsp(this));
+            this.getCommand("fly").setExecutor(new Fly(this));
+            this.getCommand("report").setExecutor(new Report(this));
+            this.getCommand("tempban").setExecutor(new TempBan(this));
+            this.getCommand("unban").setExecutor(new UnBan(this));
+            this.getCommand("maintenance").setExecutor(new maintenance(this));
+            this.getServer().getPluginManager().registerEvents(new JoinListener(this), this);
+            this.getServer().getPluginManager().registerEvents(new QuitListener(this), this);
+            this.getServer().getPluginManager().registerEvents(new ChatMessageListener(this), this);
             this.getConfig().options().copyDefaults(true);
-            this.loadConfig((Plugin)this);
+            this.loadConfig(this);
             new TickListener().runTaskTimer((Plugin)this, 0L, 1L);
             this.getLogger().info(JarUtils.lang.contains("en") ? "Started JarUtils succesfully!" : "JarUtils startato correttamente!");
         }
