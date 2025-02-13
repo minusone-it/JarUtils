@@ -26,7 +26,7 @@ public final class JarUtils extends JavaPlugin
     public HashMap<Player, String> muted_players_duration;
     public List<String> blocked_words;
     public boolean onMaintenance;
-    
+
     public void onEnable() {
         this.getLogger().info("Starting JarUtils...");
         try {
@@ -69,11 +69,11 @@ public final class JarUtils extends JavaPlugin
             this.getLogger().info("Error occurred when tried to start JarUtils: " + e.getMessage());
         }
     }
-    
+
     public void onDisable() {
         this.getLogger().info(JarUtils.lang.contains("en") ? "Stopped JarUtils!" : "Jarutils Stoppato!");
     }
-    
+
     public static String getWebContent(final String urlString) throws IOException {
         final URL url = new URL(urlString);
         final HttpURLConnection connection = followRedirects(url);
@@ -89,7 +89,7 @@ public final class JarUtils extends JavaPlugin
             connection.disconnect();
         }
     }
-    
+
     private static HttpURLConnection followRedirects(final URL url) throws IOException {
         final HttpURLConnection connection = (HttpURLConnection)url.openConnection();
         final int status = connection.getResponseCode();
@@ -99,7 +99,7 @@ public final class JarUtils extends JavaPlugin
         }
         return connection;
     }
-    
+
     public void loadConfig(final Plugin plugin) {
         final File cfile = new File(plugin.getDataFolder().getAbsolutePath() + "/config.yml");
         final FileConfiguration config = (FileConfiguration)YamlConfiguration.loadConfiguration(cfile);
@@ -109,7 +109,7 @@ public final class JarUtils extends JavaPlugin
         JarUtils.playAnnounceSound = config.getBoolean("play-announce-sound");
         JarUtils.joinQuitMessages = config.getBoolean("no-join-quit-message");
     }
-    
+
     public static JarUtils getInstance() {
         return JarUtils.instance;
     }

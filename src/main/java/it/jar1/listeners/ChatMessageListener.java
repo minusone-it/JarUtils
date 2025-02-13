@@ -1,28 +1,25 @@
 package it.jar1.listeners;
 
-import it.jar1.*;
-import org.bukkit.event.player.*;
-import java.util.*;
-import org.bukkit.event.*;
+import it.jar1.JarUtils;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class ChatMessageListener implements Listener
-{
+public class ChatMessageListener implements Listener {
     JarUtils plugin;
-    
-    public ChatMessageListener(final JarUtils plugin) {
+    public ChatMessageListener(JarUtils plugin) {
         this.plugin = plugin;
     }
-    
     @EventHandler
-    public void onChatMessage(final AsyncPlayerChatEvent event) {
-        for (final String blocked_word : this.plugin.blocked_words) {
-            if (event.getMessage().contains(blocked_word)) {
-                event.setCancelled(true);
-            }
-        }
-        if (this.plugin.muted_players.contains(event.getPlayer())) {
+    public void onChatMessage(AsyncPlayerChatEvent event) {
+        if (plugin.muted_players.contains(event.getPlayer())) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(this.plugin.prefix + "You have been muted for " + this.plugin.muted_players_duration.get(event.getPlayer()) + ". Reason: " + this.plugin.muted_players_reasons.get(event.getPlayer()));
+            event.getPlayer().sendMessage(plugin.prefix + "You have been muted for "  + plugin.muted_players_reasons.get(event.getPlayer().getName()));
         }
+        /*for (Player p : Bukkit.getOnlinePlayers()) {
+            if (event.getMessage().contains("" + p.getName())) {
+                event.setMessage(event.getMessage());
+            }
+        }*/
     }
 }

@@ -1,45 +1,41 @@
 package it.jar1.commands.utils;
 
-import it.jar1.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
-import org.bukkit.*;
+import it.jar1.JarUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-public class ChangeGamemode
-{
+public class ChangeGamemode {
     private static JarUtils plugin;
-    private static boolean lang;
-    
-    public static void changeGM(final GameMode gm, final CommandSender cmdSender) {
-        final Player p = (Player)cmdSender;
-        if (!p.getGameMode().equals((Object)gm)) {
+    private static boolean lang = it.jar1.JarUtils.lang.equalsIgnoreCase("en") || it.jar1.JarUtils.lang.equalsIgnoreCase("eng");
+    public ChangeGamemode(JarUtils plugin) {
+        this.plugin = plugin;
+    }
+    public static void changeGM(GameMode gm, CommandSender cmdSender) {
+        Player p = (Player) cmdSender;
+        if (!p.getGameMode().equals(gm)) {
             p.setGameMode(gm);
-            p.sendMessage(ChangeGamemode.lang ? (ChangeGamemode.plugin.prefix + "You are now in " + gm.toString().toLowerCase()) : (ChangeGamemode.plugin.prefix + "Ora sei in " + gm.toString().toLowerCase()));
-        }
-        else {
-            p.sendMessage(ChangeGamemode.lang ? (ChangeGamemode.plugin.prefix + "You are already in " + gm.toString().toLowerCase() + "!") : (ChangeGamemode.plugin.prefix + "Sei gi\u00e0 in " + gm.toString().toLowerCase() + "!"));
+            p.sendMessage(lang ? plugin.prefix + "You are now in " + gm.toString().toLowerCase() : plugin.prefix + "Ora sei in " + gm.toString().toLowerCase());
+        } else {
+            p.sendMessage(lang ? plugin.prefix + "You are already in "+ gm.toString().toLowerCase() +"!" : plugin.prefix + "Sei già in "+ gm.toString().toLowerCase() +"!");
         }
     }
-    
-    public static void changeGM(final GameMode gm, final CommandSender cmdSender, final String pl) {
-        final Player p = (Player)cmdSender;
-        final Player targetPlayer = Bukkit.getPlayer(pl);
+    public static void changeGM(GameMode gm, CommandSender cmdSender, String pl) {
+        Player p = (Player) cmdSender;
+
+        Player targetPlayer = Bukkit.getPlayer(pl);
+
         if (targetPlayer == null) {
-            p.sendMessage(ChangeGamemode.lang ? (ChangeGamemode.plugin.prefix + "The player " + pl + " does not exist!") : (ChangeGamemode.plugin.prefix + "Il player " + pl + " \u00e8 inesistente!"));
+            p.sendMessage(lang ? plugin.prefix + "The player " + pl + " does not exist!" : plugin.prefix + "Il player " + pl + " è inesistente!");
             return;
         }
-        if (!targetPlayer.getGameMode().equals((Object)gm)) {
+        if (!targetPlayer.getGameMode().equals(gm)) {
             targetPlayer.setGameMode(gm);
-            targetPlayer.sendMessage(ChangeGamemode.lang ? (ChangeGamemode.plugin.prefix + "You are now in " + gm.toString().toLowerCase() + " by " + p.getDisplayName()) : (ChangeGamemode.plugin.prefix + "Sei ora in " + gm.toString().toLowerCase() + " grazie a " + p.getDisplayName()));
-            p.sendMessage(ChangeGamemode.lang ? (ChangeGamemode.plugin.prefix + "Now " + pl + " is in " + gm.toString().toLowerCase()) : (ChangeGamemode.plugin.prefix + "Ora " + pl + " \u00e8 in " + gm.toString().toLowerCase()));
+            targetPlayer.sendMessage(lang ? plugin.prefix + "You are now in " + gm.toString().toLowerCase() + " by " + p.getDisplayName() : plugin.prefix + "Sei ora in " + gm.toString().toLowerCase() + " grazie a " + p.getDisplayName());
+            p.sendMessage(lang ? plugin.prefix + "Now " + pl + " is in " + gm.toString().toLowerCase() : plugin.prefix + "Ora " + pl + " è in " + gm.toString().toLowerCase());
+        } else {
+            p.sendMessage(lang ? plugin.prefix + "The player " + pl + " already is this gamemode!" : plugin.prefix + "Il player " + pl + " è già in questa gamemode!");
         }
-        else {
-            p.sendMessage(ChangeGamemode.lang ? (ChangeGamemode.plugin.prefix + "The player " + pl + " already is this gamemode!") : (ChangeGamemode.plugin.prefix + "Il player " + pl + " \u00e8 gi\u00e0 in questa gamemode!"));
-        }
-    }
-    
-    static {
-        ChangeGamemode.plugin = JarUtils.getInstance();
-        ChangeGamemode.lang = (JarUtils.lang.equalsIgnoreCase("en") || JarUtils.lang.equalsIgnoreCase("eng"));
     }
 }

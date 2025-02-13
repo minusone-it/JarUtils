@@ -25,8 +25,7 @@ public class Vanish implements CommandExecutor
                 }
                 this.vanished_players.remove(p);
                 p.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Vanish §4Disabled!") : (this.plugin.prefix + "Vanish §4Disabilitata!"));
-            }
-            else if (!this.vanished_players.contains(p)) {
+            } else if (!this.vanished_players.contains(p)) {
                 for (final Player player : Bukkit.getOnlinePlayers()) {
                     if (!player.hasPermission("jarutils.vanish.cansee")) {
                         player.hidePlayer(p);
