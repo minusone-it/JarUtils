@@ -28,7 +28,7 @@ public class Help implements CommandExecutor {
         //    throw new RuntimeException(e);
         //}
         if (args.length == 0)
-            commandSender.sendMessage(lang.contains("en") ? (plugin.prefix + "This Server is running §3§lJarUtils V1.1§r§7, by 1Jar." + (commandSender.hasPermission("jarutils.help") ? (newVersionAvailable ? " (Version "+version+" Available!)" : "") : "")) : (plugin.prefix + "Questo server esegue il plugin §3§lJarUtils V1.1§r§7, fatto da 1Jar." + (commandSender.hasPermission("jarutils.help") ? (newVersionAvailable ? " (La versione "+version+" è ora disponibile!)" : "") : "")));
+            commandSender.sendMessage(lang.contains("en") ? (plugin.prefix + "This Server is running §3§lJarUtils V1.1§r§7, by _MinusOne_." + (commandSender.hasPermission("jarutils.help") ? (newVersionAvailable ? " (Version "+version+" Available!)" : "") : "")) : (plugin.prefix + "Questo server esegue il plugin §3§lJarUtils V1.1§r§7, fatto da _MinusOne_." + (commandSender.hasPermission("jarutils.help") ? (newVersionAvailable ? " (La versione "+version+" è ora disponibile!)" : "") : "")));
         else if (commandSender.hasPermission("jarutils.help") && commandSender instanceof Player && args.length >= 1 && args[0].equalsIgnoreCase("help")) {
             commandSender.sendMessage(lang.contains("en") ? plugin.prefix + "Commands Available:" : plugin.prefix + "Comandi Disponibili:");
             commandSender.sendMessage(lang.contains("en") ? plugin.prefix + "/jarutils help or /jarutils - Shows the info(s) of this plugin." : plugin.prefix + "/jarutils help o /jarutils - Permette di vedere i comandi di base.");
