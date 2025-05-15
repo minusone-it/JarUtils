@@ -1,10 +1,14 @@
 package it.jar1.commands;
 
-import it.jar1.*;
-import org.bukkit.entity.*;
-import org.bukkit.command.*;
-import org.bukkit.*;
-import java.util.*;
+import it.jar1.JarUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Vanish implements CommandExecutor
 {
@@ -24,7 +28,7 @@ public class Vanish implements CommandExecutor
                     player.showPlayer(p);
                 }
                 this.vanished_players.remove(p);
-                p.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Vanish §4Disabled!") : (this.plugin.prefix + "Vanish §4Disabilitata!"));
+                p.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Vanish Â§4Disabled!") : (this.plugin.prefix + "Vanish Â§4Disabilitata!"));
             } else if (!this.vanished_players.contains(p)) {
                 for (final Player player : Bukkit.getOnlinePlayers()) {
                     if (!player.hasPermission("jarutils.vanish.cansee")) {
@@ -32,12 +36,12 @@ public class Vanish implements CommandExecutor
                     }
                 }
                 this.vanished_players.add(p);
-                p.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Vanish §aEnabled!") : (this.plugin.prefix + "Vanish §2Abilitata!"));
+                p.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Vanish Â§aEnabled!") : (this.plugin.prefix + "Vanish Â§2Abilitata!"));
             }
             return true;
         }
         if (!(commandSender instanceof Player)) {
-            commandSender.sendMessage(this.plugin.prefix + (JarUtils.lang.contains("en") ? "§cYou have to login as a player to execute this command!" : "§cDevi essere un player per eseguire questo comando!"));
+            commandSender.sendMessage(this.plugin.prefix + (JarUtils.lang.contains("en") ? "Â§cYou have to login as a player to execute this command!" : "Â§cDevi essere un player per eseguire questo comando!"));
             return true;
         }
         return false;

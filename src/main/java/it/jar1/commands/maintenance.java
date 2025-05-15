@@ -1,8 +1,6 @@
 package it.jar1.commands;
 
 import it.jar1.JarUtils;
-import org.bukkit.BanList;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

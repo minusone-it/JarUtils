@@ -11,12 +11,10 @@ public class QuitListener implements Listener
     public QuitListener(final JarUtils plugin) {
         this.plugin = plugin;
     }
-    
-    @EventHandler
+
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onQuit(final PlayerQuitEvent event) {
-        final JarUtils plugin = this.plugin;
-        if (JarUtils.joinQuitMessages) {
-            event.setQuitMessage("");
-        }
+        if (JarUtils.joinQuitMessages)
+            event.setQuitMessage(null);
     }
 }

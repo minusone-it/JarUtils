@@ -31,6 +31,10 @@ commands:
     aliases: "cheater"
   maintenance:
     permission: "jarutils.maintenance"
+#  mute:
+#    permission: "jarutils.mute"
+#  unmute:
+#    permission: "jarutils.unmute"
 permissions:
   jarutils.help:
     default: op
@@ -59,4 +63,10 @@ permissions:
   jarutils.unban:
     default: op
   jarutils.maintenance:
+    default: op
+  jarutils.mute:
+    default: op
+  jarutils.unmute:
+    default: op
+  nick.staff:
     default: op

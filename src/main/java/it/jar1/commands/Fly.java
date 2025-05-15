@@ -1,10 +1,14 @@
 package it.jar1.commands;
 
-import org.bukkit.entity.*;
-import it.jar1.*;
-import java.util.*;
-import org.bukkit.command.*;
-import org.bukkit.*;
+import it.jar1.JarUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Fly implements CommandExecutor
 {
@@ -23,13 +27,13 @@ public class Fly implements CommandExecutor
                 this.flying_players.add(p);
                 p.setAllowFlight(true);
                 p.setFlying(true);
-                p.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ง2Enabled.") : (this.plugin.prefix + "Fly ง2Abilitata."));
+                p.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ยง2Enabled.") : (this.plugin.prefix + "Fly ยง2Abilitata."));
             }
             else {
                 this.flying_players.remove(p);
                 p.setAllowFlight(false);
                 p.setFlying(false);
-                p.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ง4Disabled.") : (this.plugin.prefix + "Fly ง4Disabilitata."));
+                p.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ยง4Disabled.") : (this.plugin.prefix + "Fly ยง4Disabilitata."));
             }
             return true;
         }
@@ -41,15 +45,15 @@ public class Fly implements CommandExecutor
                     this.flying_players.add(targetPlayer);
                     targetPlayer.setAllowFlight(true);
                     targetPlayer.setFlying(true);
-                    targetPlayer.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ง2Enabled by " + sender.getName() + ".") : (this.plugin.prefix + "Fly ง2Abilitata da " + sender.getName() + "."));
-                    sender.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ง2Enabled for " + targetPlayer.getName() + ".") : (this.plugin.prefix + "Fly ง2Abilitata per " + targetPlayer.getName() + "."));
+                    targetPlayer.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ยง2Enabled by " + sender.getName() + ".") : (this.plugin.prefix + "Fly ยง2Abilitata da " + sender.getName() + "."));
+                    sender.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ยง2Enabled for " + targetPlayer.getName() + ".") : (this.plugin.prefix + "Fly ยง2Abilitata per " + targetPlayer.getName() + "."));
                 }
                 else {
                     this.flying_players.remove(targetPlayer);
                     targetPlayer.setAllowFlight(false);
                     targetPlayer.setFlying(false);
-                    targetPlayer.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ง4Disabled by " + sender.getName() + ".") : (this.plugin.prefix + "Fly ง4Disabilitata da " + sender.getName() + "."));
-                    sender.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ง4Disabled for " + targetPlayer.getName() + ".") : (this.plugin.prefix + "Fly ง4Disabilitata per " + targetPlayer.getName() + "."));
+                    targetPlayer.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ยง4Disabled by " + sender.getName() + ".") : (this.plugin.prefix + "Fly ยง4Disabilitata da " + sender.getName() + "."));
+                    sender.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Fly ยง4Disabled for " + targetPlayer.getName() + ".") : (this.plugin.prefix + "Fly ยง4Disabilitata per " + targetPlayer.getName() + "."));
                 }
             }
             else {

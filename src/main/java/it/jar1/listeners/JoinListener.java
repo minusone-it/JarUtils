@@ -12,12 +12,12 @@ public class JoinListener implements Listener
         this.plugin = plugin;
     }
     
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(final PlayerJoinEvent event) {
+        if (JarUtils.joinQuitMessages)
+            event.setJoinMessage(null);
         if (plugin.onMaintenance && !event.getPlayer().hasPermission("jarutils.maintenance"))
             event.getPlayer().kickPlayer("§cMAINTENANCE ON. §7See more info on https://dsc.gg/power-pixel/");
-        if (plugin.joinQuitMessages) {
-            event.setJoinMessage("");
-        }
+
     }
 }

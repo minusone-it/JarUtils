@@ -1,17 +1,21 @@
 package it.jar1;
 
-import org.bukkit.plugin.java.*;
-import org.bukkit.entity.*;
-import java.util.*;
-import org.bukkit.command.*;
 import it.jar1.commands.*;
-import org.bukkit.event.*;
-import org.bukkit.plugin.*;
 import it.jar1.listeners.*;
-import it.jar1.event.*;
-import java.net.*;
-import java.io.*;
+import me.clip.placeholderapi.PlaceholderAPI;
+import me.neznamy.tab.api.TabAPI;
+import me.neznamy.tab.api.TabPlayer;
+import me.neznamy.tab.api.event.player.PlayerLoadEvent;
+import me.neznamy.tab.api.event.plugin.PlaceholderRegisterEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.*;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
 public final class JarUtils extends JavaPlugin
 {
@@ -36,15 +40,15 @@ public final class JarUtils extends JavaPlugin
             JarUtils.announceTitleColor = this.getConfig().getString("announce-title-color");
             JarUtils.playAnnounceSound = this.getConfig().getBoolean("play-announce-sound");
             JarUtils.joinQuitMessages = this.getConfig().getBoolean("no-join-quit-message");
-            this.muted_players = new ArrayList<Player>();
-            this.muted_players_reasons = new HashMap<Player, String>();
-            this.muted_players_duration = new HashMap<Player, String>();
-            this.blocked_words = (List<String>)this.getConfig().getStringList("blocked-words");
+            this.muted_players = new ArrayList<>();
+            this.muted_players_reasons = new HashMap<>();
+            this.muted_players_duration = new HashMap<>();
+            this.blocked_words = this.getConfig().getStringList("blocked-words");
             this.onMaintenance = false;
-            final String version = "1.0";
-            if (!version.equals("1.0")) {
-                this.getLogger().info(this.prefix + "Version " + version + " Available!");
-            }
+            //final String version = "1.0";
+            //if (!version.equals("1.0")) {
+            //    this.getLogger().info(this.prefix + "Version " + version + " Available!");
+            //}
             this.getCommand("jarutils").setExecutor(new Help(this));
             this.getCommand("vanish").setExecutor(new Vanish(this));
             this.getCommand("announce").setExecutor(new Announce(this));
@@ -57,12 +61,19 @@ public final class JarUtils extends JavaPlugin
             this.getCommand("tempban").setExecutor(new TempBan(this));
             this.getCommand("unban").setExecutor(new UnBan(this));
             this.getCommand("maintenance").setExecutor(new maintenance(this));
+            //this.getCommand("mute").setExecutor(new TempMute(this));
+            //this.getCommand("unmute").setExecutor(new UnMute(this));
             this.getServer().getPluginManager().registerEvents(new JoinListener(this), this);
             this.getServer().getPluginManager().registerEvents(new QuitListener(this), this);
             this.getServer().getPluginManager().registerEvents(new ChatMessageListener(this), this);
+            this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+            this.getServer().getMessenger().registerIncomingPluginChannel(this, "jarutils:tempban", new TempBan(this));
+            TabAPI.getInstance().getEventBus().register(PlaceholderRegisterEvent.class, event -> {
+                //TabPlayer tabPlayer = event.();
+            });
             this.getConfig().options().copyDefaults(true);
             this.loadConfig(this);
-            new TickListener().runTaskTimer((Plugin)this, 0L, 1L);
+
             this.getLogger().info(JarUtils.lang.contains("en") ? "Started JarUtils succesfully!" : "JarUtils startato correttamente!");
         }
         catch (Exception e) {
@@ -102,7 +113,7 @@ public final class JarUtils extends JavaPlugin
 
     public void loadConfig(final Plugin plugin) {
         final File cfile = new File(plugin.getDataFolder().getAbsolutePath() + "/config.yml");
-        final FileConfiguration config = (FileConfiguration)YamlConfiguration.loadConfiguration(cfile);
+        final FileConfiguration config = YamlConfiguration.loadConfiguration(cfile);
         this.prefix = config.getString("prefix");
         JarUtils.lang = config.getString("lang");
         JarUtils.announceTitleColor = config.getString("announce-title-color");

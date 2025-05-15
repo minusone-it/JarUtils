@@ -1,10 +1,12 @@
 package it.jar1.commands;
 
-import it.jar1.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
-import org.bukkit.*;
-import java.util.*;
+import it.jar1.JarUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class Announce implements CommandExecutor
 {
@@ -17,9 +19,9 @@ public class Announce implements CommandExecutor
     public boolean onCommand(final CommandSender commandSender, final Command command, final String s, final String[] args) {
         if (commandSender.hasPermission("jarutils.announce") && args.length > 0) {
             String message = String.join(" ", (CharSequence[])args);
-            message = message.replace("&", "§");
+            message = message.replace("&", "Â§");
             for (final Player p : Bukkit.getOnlinePlayers()) {
-                p.sendMessage(JarUtils.lang.contains("en") ? (JarUtils.announceTitleColor + "Announce:§r " + message) : (JarUtils.announceTitleColor + "Annuncio:§r " + message));
+                p.sendMessage(JarUtils.lang.contains("en") ? (JarUtils.announceTitleColor + "Announce:Â§r " + message) : (JarUtils.announceTitleColor + "Annuncio:Â§r " + message));
                 p.sendTitle(JarUtils.lang.contains("en") ? (JarUtils.announceTitleColor + "Announce") : (JarUtils.announceTitleColor + "Annuncio"), message);
                 if (JarUtils.playAnnounceSound) {
                     p.playSound(p.getLocation(), Sound.NOTE_PLING, 2.0f, 1.0f);
@@ -27,7 +29,7 @@ public class Announce implements CommandExecutor
             }
             return true;
         }
-        commandSender.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "§cCan't send message. Have you forgotten to insert an announcement message?") : (this.plugin.prefix + "§cImpossibile mandare il messaggio. Ti sei per caso dimenticato di mettere il messaggio di annuncio?"));
+        commandSender.sendMessage(JarUtils.lang.contains("en") ? (this.plugin.prefix + "Â§cCan't send message. Have you forgotten to insert an announcement message?") : (this.plugin.prefix + "Â§cImpossibile mandare il messaggio. Ti sei per caso dimenticato di mettere il messaggio di annuncio?"));
         return false;
     }
 }
